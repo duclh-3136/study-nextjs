@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPropsContext } from "next"
+import Link from "next/link"
 
 export interface IPostListProps {
     posts: any []
@@ -10,7 +11,7 @@ function ListPost({posts}: IPostListProps) {
         {
             posts.map((post) => {
                 return (
-                    <li key={post.id}>{ post.title }</li>
+                    <li key={post.id}><Link href={`/get-static-paths/${post.id}`}>{ post.title }</Link></li>
                 )
             })
         }
@@ -28,7 +29,7 @@ export const  getStaticProps: GetStaticProps<IPostListProps> = async (context: G
         props: {
             posts: posts.map((post: any) => {
                 return {
-                    id: post.id,
+                    id: post.id.toString(),
                     title: post.title
                 }
             })
